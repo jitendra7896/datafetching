@@ -9,7 +9,7 @@ def master(df2):
     canv = tk.Canvas(master, width=800, height=900, bg='lightgreen')  # creating a window
     canv.pack()
     opt = tk.Label(master, text=df2.head(30), bg='lightgreen', fg='black',
-                                       font=('helvetica', 10, 'bold'))  # label sheet name
+                                       font=('helvetica', 10, 'bold'))  # label output dataframe in new window
     canv.create_window(200, 330, window=opt)
 
 

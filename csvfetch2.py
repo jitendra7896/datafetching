@@ -34,8 +34,8 @@ if correct it will print starting 10 lines of sheet'''
 def submit():
     global df
     try:
-        df = pd.read_excel(import_file_path,sheet_name.get(),usecols=[1,4,6])
-        tryfile.master(df)
+        df = pd.read_excel(import_file_path,sheet_name.get(),usecols=[1,4,6])    #reading specific column of file
+        tryfile.master(df)                                                      #using tryfile module user created
     except:
         print("Sheet name din't match")
         root.destroy()
@@ -48,7 +48,8 @@ def crtfile():
     except:
         print("file name is wrong or data not selected")
         root.destroy()
-'''buttons and inputs'''
+
+        '''buttons and inputs'''
 
 browseButton_Excel = tk.Button(text='Import Excel File', command=getExcel, bg='green', fg='white',
                                font=('helvetica', 12, 'bold'))                                          #importing file

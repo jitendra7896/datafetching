@@ -26,7 +26,7 @@ def getExcel():
         canv.create_window(430, 30, window=w)
 
     except:
-        print("file type not correct")
+        print("NameError : File_Type_Not_Correct")
         root.destroy()
 
 '''function to print the sheet if sheet name incorrect window will be closed
@@ -40,7 +40,7 @@ def submit():
                      font=('helvetica', 10, 'bold'))
         canv.create_window(450, 70, window=c)
     except:
-        print("Sheet name din't match")
+        print("Find_Error : Sheet_You_Searched_For_Not_Present")
         root.destroy()
 
 '''create a file and write data into it'''

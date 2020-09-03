@@ -1,31 +1,33 @@
 import tkinter as tk           #pip install tk
-from tkinter import filedialog
+import tryfile                  #created a module named tryfile
+from tkinter import filedialog,messagebox
 from datetime import datetime  #pip install datetime
 import pandas as pd            #pip install pandas
 root = tk.Tk()                  #creating base root tk object
 
 canv = tk.Canvas(root, width=500, height=300, bg='lightgreen')         #creating a window
 canv.pack()
-import_file_path=pd.ExcelFile("Stock_Report.xlsx",)
+import_file_path=pd.ExcelFile("Stock_Report_02.xlsm",)
 sheet_name=tk.StringVar(root,value='Online Catalog')
 filesname=tk.StringVar()
 
 
 '''function to import excel file
-if the extension is not xlsx or csv the file will not open'''
+if the extension is not xlsx or xlsm the file will not open'''
 
 def getExcel():
     global data
     global import_file_path
     import_file_path = filedialog.askopenfilename()
     try:
-        import_file_path.endswith('xlsx' or 'csv')
+        import_file_path.endswith('xlsx' or 'xlsm')
         data = pd.ExcelFile(import_file_path)
         w = tk.Label(root, text="            file selected  ",bg='lightgreen', fg='black',
                                font=('helvetica', 10, 'bold'))
         canv.create_window(430, 30, window=w)
 
     except:
+        tk.messagebox.showerror(title="Name_Error", message="File_Type_Not_Correct")
         print("NameError : File_Type_Not_Correct")
         root.destroy()
 
@@ -40,6 +42,7 @@ def submit():
                      font=('helvetica', 10, 'bold'))
         canv.create_window(450, 70, window=c)
     except:
+        tk.messagebox.showerror(title="Find_Error", message="Sheet_You_Searched_For_Not_Present")
         print("Find_Error : Sheet_You_Searched_For_Not_Present")
         root.destroy()
 
@@ -51,6 +54,19 @@ def crtfile():
         timeStr = dateTimeObj.strftime("%H%M%S%f")
         tstr=q+timeStr+".xlsx"
         df.to_excel(tstr,index=False)
+        df3=pd.read_excel(import_file_path,sheet_name="Online Catalog",usecols=[5,6,7,29,30])
+        df2=pd.read_excel(tstr)
+
+        #adding status column
+        tryfile.add_status(df3,df2)
+        
+        #adding vendor column
+        tryfile.vendor_code(df3,df2)
+
+        #adding new price
+        tryfile.newprice(df3,df2)
+        
+        df2.to_excel(tstr, index=False)            #saving into the file
     except:
         print("file name is wrong or data not selected")
     finally:

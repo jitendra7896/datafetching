@@ -17,7 +17,7 @@ def vendor_code(df3,df2):
             new_vendor_code[i]=df3.iloc[:,2][i]
 
     x = len(df2.columns)
-    df2.insert(x, "New Vendor Code", new_vendor_code)
+    df2.insert(x, "Vendor Code", new_vendor_code)
 def newprice(df3,df2):
     new_price=pd.Series([])
     for i in range(len(df2)):

@@ -37,7 +37,7 @@ if correct it will print starting 10 lines of sheet'''
 def submit():
     global df
     try:
-        df = pd.read_excel(import_file_path,sheet_name.get(),usecols=[1,4,6])
+        df = pd.read_excel(import_file_path,sheet_name.get(),usecols=[1,4])
         c = tk.Label(root, text=" data selected", bg='lightgreen', fg='black',
                      font=('helvetica', 10, 'bold'))
         canv.create_window(450, 70, window=c)
@@ -59,13 +59,13 @@ def crtfile():
 
         #adding status column
         tryfile.add_status(df3,df2)
-        
+
         #adding vendor column
         tryfile.vendor_code(df3,df2)
 
         #adding new price
         tryfile.newprice(df3,df2)
-        
+
         df2.to_excel(tstr, index=False)            #saving into the file
     except:
         print("file name is wrong or data not selected")
